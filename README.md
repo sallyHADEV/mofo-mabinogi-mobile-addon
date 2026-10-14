@@ -25,20 +25,11 @@
 
 ## 🎬 소개 영상
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="docs/media/mofo-intro.mp4"><img src="docs/images/video-intro.jpg" alt="MoFo 소개 영상"></a>
-      <br><b>▶ MoFo 소개</b> <sub>(15초)</sub>
-    </td>
-    <td align="center" width="50%">
-      <a href="docs/media/mofo-song-finder.mp4"><img src="docs/images/video-song-finder.jpg" alt="원곡 찾기 소개 영상"></a>
-      <br><b>▶ NEW · 원곡 찾기</b> <sub>(22초)</sub>
-    </td>
-  </tr>
-</table>
-
-<sub>썸네일을 누르면 영상이 재생됩니다.</sub>
+<div align="center">
+  <img src="docs/images/mofo-intro.webp" width="800" alt="MoFo 소개 영상">
+  <br>
+  <a href="docs/media/mofo-intro.mp4"><b>▶ 소리 있는 원본 영상 보기 (mp4)</b></a>
+</div>
 
 ---
 

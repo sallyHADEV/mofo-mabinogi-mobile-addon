@@ -23,22 +23,13 @@
 
 ---
 
-## 🎬 Videos
+## 🎬 Intro video
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="docs/media/mofo-intro.mp4"><img src="docs/images/video-intro.jpg" alt="MoFo intro video"></a>
-      <br><b>▶ Meet MoFo</b> <sub>(15s)</sub>
-    </td>
-    <td align="center" width="50%">
-      <a href="docs/media/mofo-song-finder.mp4"><img src="docs/images/video-song-finder.jpg" alt="Song Finder video"></a>
-      <br><b>▶ NEW · Song Finder</b> <sub>(22s)</sub>
-    </td>
-  </tr>
-</table>
-
-<sub>Click a thumbnail to play the video. The UI and videos are in Korean.</sub>
+<div align="center">
+  <img src="docs/images/mofo-intro.webp" width="800" alt="MoFo intro video">
+  <br>
+  <a href="docs/media/mofo-intro.mp4"><b>▶ Watch the full video with sound (mp4)</b></a>
+</div>
 
 ---
 
