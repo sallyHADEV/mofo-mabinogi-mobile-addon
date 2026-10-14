@@ -19,6 +19,10 @@
 
 **한국어** · [English](README.en.md) · [日本語](README.ja.md) · [繁體中文](README.zh-TW.md)
 
+### [⬇ mofo.exe 다운로드](https://github.com/sallyHADEV/mofo-mabinogi-mobile-addon/releases/latest/download/mofo.exe)
+
+<sub>[Releases](https://github.com/sallyHADEV/mofo-mabinogi-mobile-addon/releases/latest) · Windows 10 / 11</sub>
+
 </div>
 
 ---
