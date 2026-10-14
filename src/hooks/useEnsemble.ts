@@ -17,9 +17,9 @@ export function useEnsemble(
   // 합주 집계 버퍼링 중인 세션 (대기 중 표시용)
   const [bufferingSession, setBufferingSession] = useState<EnsembleSession | null>(null);
 
-  const bufferTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const bufferTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // 버퍼링 중인 대표곡명 (버퍼링 도중 다른 곡으로 바뀔 때 기존 타이머 취소용)
   const bufferingTitleRef = useRef<string | null>(null);
   // 이미 화면에 띄운 곡명 (곡이 바뀌기 전까지 재표시 방지)

@@ -183,7 +183,7 @@ export const App: React.FC = () => {
   const [isMabiRunning, setIsMabiRunning] = useState<boolean>(false);
   const [isMabiStateInitialized, setIsMabiStateInitialized] = useState<boolean>(false);
   const hasEverDetectedMabiRef = useRef<boolean>(false);
-  const autoCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [titlebar, setTitlebar] = useState({ height: 31, right: 138 });
   const docked = !!settings.titlebarDocked;
@@ -252,7 +252,7 @@ export const App: React.FC = () => {
   // 더블클릭으로 5초간 임시 숨겨진 위젯 관리
   type WidgetKey = 'clock' | 'altering' | 'media' | 'missions' | 'toolbar' | 'songFinder';
   const [hiddenWidgets, setHiddenWidgets] = useState<Set<WidgetKey>>(new Set());
-  const hideTimersRef = useRef<Map<WidgetKey, NodeJS.Timeout>>(new Map());
+  const hideTimersRef = useRef<Map<WidgetKey, ReturnType<typeof setTimeout>>>(new Map());
 
   const hideTemporarily = useCallback((key: WidgetKey, durationMs = 5000) => {
     if (hideTimersRef.current.has(key)) {
@@ -314,7 +314,7 @@ export const App: React.FC = () => {
 
   // 모든 미션 완료 시 10초 후 자동 페이드아웃 상태
   const [isMissionsAutoHidden, setIsMissionsAutoHidden] = useState(false);
-  const missionsAutoCompleteTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const missionsAutoCompleteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 미션 데이터 기반 모든 미션 완료 여부 감지 및 10초 후 페이드아웃 타이머
   useEffect(() => {
@@ -1023,7 +1023,7 @@ export const App: React.FC = () => {
 
   // 1.5초 주기 브릿지 데이터 폴링 (마비노기 최소화 또는 미실행 시 폴링 건너뜀)
   useEffect(() => {
-    let timerId: NodeJS.Timeout | null = null;
+    let timerId: ReturnType<typeof setTimeout> | null = null;
     let isCancelled = false;
 
     const runPolling = async () => {
