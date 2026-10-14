@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Nanum+Myeongjo:wght@700;800&family=Pretendard:wght@400;500;600;700;800&display=swap');
+
+/* The right edge is the native caption-button boundary minus 10 CSS pixels.
+   Clip the whole row so even an in-flight layout animation cannot cover it. */
+.titlebar-dock, .dock-facilities {
+  --dock-card-bg: #182333;
+  --dock-card-border: #475569;
+  --dock-card-radius: 999px;
+}
+.titlebar-dock {
+  position: fixed;
+  top: 0;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 100;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.titlebar-dock > div {
+  transform: scale(var(--dock-scale, 1));
+  transform-origin: top right;
+}
+.dock-toolbar { flex: 0 0 auto; }
+.dock-altering-region { flex: 0 1 auto; min-width: 0; overflow: hidden; }
+.dock-media-region { flex: 0 1 260px; min-width: 90px; overflow: hidden; }
+.dock-facilities { display: flex; align-items: center; gap: 4px; width: max-content; }
+.dock-facility {
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 8px;
+  color: #f1f5f9; font: 700 11px var(--font-sans);
+  white-space: nowrap; cursor: pointer;
+  pointer-events: auto;
+}
+.dock-facility:disabled { cursor: default; opacity: 1; }
+.dock-count { font-variant-numeric: tabular-nums; }
+.dock-count-completed { color: #fbbf24; text-shadow: 0 0 5px rgba(245, 158, 11, .35); }
+.dock-slots { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, 3px); gap: 2px; }
+.dock-slots i { width: 5px; height: 3px; border-radius: 999px; transition: background-color .3s; }
+.dock-media { display: flex; align-items: center; gap: 6px; padding: 1px 4px 1px 8px; font-size: 11px; }
+.dock-media-controls { display: flex; gap: 2px; flex: 0 0 auto; pointer-events: auto; }
+.dock-media-controls button { display: grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: 50%; background: #334155; color: #e2e8f0; cursor: pointer; pointer-events: auto; }
+.dock-media-controls button svg { pointer-events: none; }
+.dock-media-controls button:disabled { opacity: .4; cursor: default; }
+.dock-media-controls button:hover:not(:disabled) { background: #475569; }
+.dock-marquee { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
+.dock-marquee > span { display: inline-block; width: max-content; }
+.dock-now-playing { min-width: 0; overflow: hidden; }
+.dock-song { display: flex; width: 150px; align-items: center; padding: 0 8px; color: #fde68a; font: 600 11px var(--font-sans); cursor: pointer; pointer-events: auto; }
+.dock-facility, .dock-media, .dock-song {
+  height: 28px;
+  border-radius: var(--dock-card-radius);
+  border: 1px solid var(--dock-card-border);
+  background: var(--dock-card-bg);
+}
+.dock-now-playing:empty { display: none; }
+@keyframes dock-scroll { 0%, 15% { transform: translateX(0); } 85%, 100% { transform: translateX(var(--marquee-distance)); } }
+@media (prefers-reduced-motion: reduce) { .dock-marquee > span { animation: none !important; } }
+
+:root {
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Cinzel', 'Nanum Myeongjo', serif;
+  --gold-primary: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.35);
+  --gold-bright: #fde047;
+  --hud-bg: rgba(15, 23, 42, 0.78);
+  --hud-border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: transparent !important;
+  color: #f8fafc;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 글래스모피즘 HUD 컨테이너 */
+.hud-glass {
+  background: var(--hud-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--hud-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.hud-glass-gold {
+  background: rgba(26, 20, 10, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.55), 0 0 20px var(--gold-glow);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 폰트 유틸 */
+.font-serif-title {
+  font-family: var(--font-serif);
+}
+
+/* 펄스 글로우 애니메이션 */
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4), inset 0 0 8px rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(245, 158, 11, 0.8), inset 0 0 14px rgba(245, 158, 11, 0.4);
+    border-color: rgba(253, 224, 71, 0.9);
+  }
+}
+
+.animate-gold-pulse {
+  animation: goldPulse 2s infinite ease-in-out;
+}
+
+/* 프로그레스 바 스트라이프 모션 */
+@keyframes progressStripe {
+  0% { background-position: 0 0; }
+  100% { background-position: 30px 0; }
+}
+
+.progress-animated {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+  animation: progressStripe 1.5s linear infinite;
+}
+
+/* 스크롤바 완전 숨김 유틸 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.mofo-aurora-gpu-shimmer { position: relative; }
+.mofo-aurora-gpu-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: mofoAuroraTranslate 3s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+@keyframes mofoAuroraTranslate {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
