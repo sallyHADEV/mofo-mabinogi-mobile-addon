@@ -1,63 +1,149 @@
-# MoFo (모포) - 마비노기 모바일 정보 오버레이 (HUD)
+<div align="center">
 
-> **Mo**bi + In**Fo** : 마비노기 모바일 생활 및 연주 정보를 게임 화면 위에 실시간으로 띄워주는 독립형 경량 오버레이 프로그램입니다.
+<img src="src-tauri/icons/128x128@2x.png" width="128" alt="MoFo 아이콘">
 
----
+# MoFo · 모포
 
-## 🌟 주요 기능
+**마비노기 모바일 정보 오버레이 (HUD)**
 
-1. **에린 시간 상시 표시 배지 (`ErinnClockBadge`)**
-   * 게임 내 실시간 에린 시각(`ErinnNow`), 날씨(`Weather`), 필드 위치(`WorldPosition`)를 반투명 다크 골드 배지로 상시 표시.
+<sub><b>Mo</b>bi + In<b>Fo</b> — 게임은 그대로, 필요한 정보만 화면 위에.</sub>
 
-2. **가공 시설 현황 슬롯 HUD (`AlteringSlotsHud`)**
-   * 가공기 가동 개수, 완료 개수, 수령 가능 상태를 라운드진 사각 슬롯 카드 형태로 도식화.
-   * 가동 중인 가공품: 남은 시간 실시간 카운트다운(`mm:ss`) 및 애니메이션 프로그레스 바 표시.
-   * 완료된 가공품: 골드 펄스 글로우 및 **'원클릭 수령'** 버튼 제공.
+<br>
 
-3. **합주 특화 음악회 방송 타이포 모션 (`ConcertNotification`)**
-   * **합주 4초 디바운스 집계**: 다수의 인원이 같은 악보를 연주할 때, 첫 연주 감지 후 설정된 시간(기본 4초) 동안 멤버들을 취합하여 단 한 번만 우아한 타이포 모션으로 화면 중앙에 표출.
-   * **클래식 방송 자막 연출**: 세리프/명조 폰트, 황금빛 후광 오라, 합주 인원수(예: `CONCERT ENSEMBLE • 4인 합주`) 및 연주자·악기 라인업 표시.
-   * **현재 연주 상시 배지**: 연주 중인 대표 곡명을 화면 상단에 콤팩트하게 상시 표시.
+![Platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?logo=windows&logoColor=white)
+![Tauri](https://img.shields.io/badge/Tauri-2-24C8DB?logo=tauri&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-stable-000000?logo=rust&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-4. **화면 캡처 / OBS 녹화 최적화**
-   * 투명 윈도우 배경 처리(`background: transparent`).
-   * **OBS 브라우저 소스 직결 지원**: `http://localhost:3002`를 OBS의 브라우저 소스(1920x1080)로 등록하면 게임 캡처 위에 투명 레이어로 무손실 고화질 합성 녹화 가능.
-   * 캡처 방지 속성이 없으므로 모니터 디스플레이 캡처(GeForce Experience 등)에서도 그대로 녹화됨.
+**한국어** · [English](README.en.md)
 
-5. **오버레이 설정 모달 (`SettingsModal`)**
-   * 합주 집계 대기 딜레이(1~10초) 조절.
-   * 화면 중앙 자막 표시 유지 시간(3~15초) 조절.
-   * 각 HUD 위젯 표시/숨김 토글.
-   * **'음악회 모션 테스트 실행'** 버튼으로 언제든 연출 프리뷰 가능.
+</div>
 
 ---
 
-## 🚀 실행 방법
+## 🎬 소개 영상
 
-### 방법 1: 웹 오버레이 모드 (OBS 브라우저 소스 / 웹 브라우저)
-별도의 Mabinogi Bridge 서버(포트 3001, 이 저장소에 포함되지 않음)가 켜진 상태에서:
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <a href="docs/media/mofo-intro.mp4"><img src="docs/images/video-intro.jpg" alt="MoFo 소개 영상"></a>
+      <br><b>▶ MoFo 소개</b> <sub>(15초)</sub>
+    </td>
+    <td align="center" width="50%">
+      <a href="docs/media/mofo-song-finder.mp4"><img src="docs/images/video-song-finder.jpg" alt="원곡 찾기 소개 영상"></a>
+      <br><b>▶ NEW · 원곡 찾기</b> <sub>(22초)</sub>
+    </td>
+  </tr>
+</table>
+
+<sub>썸네일을 누르면 영상이 재생됩니다.</sub>
+
+---
+
+## ✨ 주요 기능
+
+### 🕰️ 에린 타임
+게임 속 에린 시각 · 날씨 · 현재 위치를 작은 배지로 항상 표시합니다.
+
+<img src="docs/images/03-clock-badge-move-mode.png" width="420" alt="에린 시계 배지">
+
+### ⚒️ 가공 현황
+가공 시설 6곳(금속 · 목재 · 가죽 · 옷감 · 약품 · 식재료)의 남은 시간을 실시간으로 카운트다운합니다. 완료되면 골드로 빛나고, **클릭 한 번으로 바로 수령**합니다. 2행 / 1행 레이아웃을 고를 수 있습니다.
+
+<img src="docs/images/17-altering-hud-2row.png" width="420" alt="가공 현황 HUD">
+
+### 📋 남은 미션
+일일 · 주간 미션 중 아직 못 한 것만 모아 보여 줍니다.
+
+<img src="docs/images/21-missions-tab-daily.png" width="240" alt="남은 미션">
+
+### 🎵 미디어 리모컨
+스포티파이 · YT뮤직 · 크롬 · 엣지 등 PC에서 재생 중인 음악을 게임을 떠나지 않고 조작합니다. 재생 / 일시정지 / 이전 / 다음 / 볼륨.
+
+<img src="docs/images/24-media-remote-playing.png" width="360" alt="미디어 리모컨">
+
+### 🎻 합주 방송 모션
+근처에서 합주가 시작되면 같은 악보 연주자를 몇 초간 모았다가, 방송 자막처럼 **단 한 번** 우아하게 띄웁니다. 테마 4종을 고를 수 있습니다.
+
+<img src="docs/images/41-theme-cinematic-crop.png" width="640" alt="합주 방송 모션">
+
+<details>
+<summary>테마 4종 보기</summary>
+
+| **시네마틱 골드** | **가시덩굴 개화** |
+|:---:|:---:|
+| <img src="docs/images/41-theme-cinematic-crop.png" width="380"> | <img src="docs/images/42-theme-vinebloom-crop.png" width="380"> |
+| **아케인 룬 마법** | **오로라 프리즘** |
+| <img src="docs/images/43-theme-arcanerune-crop.png" width="380"> | <img src="docs/images/44-theme-auroraprism-crop.png" width="380"> |
+
+</details>
+
+### 🔎 원곡 찾기 <sup>NEW</sup>
+악보를 골라 연주하면 악보 제목에서 `[합주용]`, `#피아노` 같은 주석을 걷어 내고 원곡을 찾아 냅니다. 확실한 결과일 때만 **채팅으로 자동 공유**합니다.
+FLO · iTunes · Deezer 공개 검색을 쓰므로 **API 키가 필요 없고 비용도 들지 않습니다.**
+설정 → **원곡 찾기 ON** 으로 켭니다.
+
+### 🖱️ 게임 방해 없는 오버레이
+- **스마트 관통**: 위젯만 클릭되고 빈 곳 클릭은 게임으로 그대로 통과합니다.
+- **완전 관통 (F8)**: 위젯까지 모든 클릭을 게임으로 넘깁니다.
+- 위젯 **더블클릭으로 5초 숨김**, 위치 이동 / 고정 / 초기화.
+- 마비노기 창을 최소화하면 오버레이도 함께 숨고, 다시 띄우면 돌아옵니다.
+- 시스템 트레이 아이콘으로 표시 / 숨김.
+
+### ⚙️ 설정
+레이아웃 프리셋 3개(실시간 자동 저장), UI 크기 75~200%, 위젯별 표시 토글, 합주 집계 시간, 자막 유지 시간 등을 조절합니다.
+
+<img src="docs/images/11b-settings-modal-crop.png" width="640" alt="설정 창">
+
+---
+
+## 🚀 시작하기
+
+### 필요한 것
+- Windows 10 / 11 (WebView2 런타임)
+- **마비노기 모바일 PC 클라이언트** — MoFo는 게임과 함께 설치되는 `MabinogiMobile_CLI.exe`로 정보를 읽습니다. 실행 중인 게임 위치에서 자동으로 찾고, 못 찾으면 환경 변수 `MABINOGI_CLI_PATH`로 지정할 수 있습니다.
+- 빌드용: [Node.js](https://nodejs.org/) 18+, [Rust](https://www.rust-lang.org/tools/install)
+
+### 빌드 & 실행
 
 ```bash
-npm run dev
+npm install
+npm run tauri:dev     # 개발 모드로 실행
+npm run tauri:build   # 실행 파일 빌드 → src-tauri/target/release/mofo.exe
 ```
 
-* 브라우저 또는 OBS 브라우저 소스에서 `http://localhost:3002` 접속.
-* 투명 배경이 유지된 채로 HUD가 게임 위에 오버레이됩니다.
+투명 · 프레임 없는 창이 게임 위에 항상 위로 떠서 오버레이됩니다.
 
-### 방법 2: Tauri 네이티브 데스크톱 앱 실행 (투명 프레임리스 창)
+### OBS 녹화
+캡처 방지 속성이 없어서 디스플레이 캡처(OBS, GeForce Experience 등)에 그대로 녹화됩니다.
 
-```bash
-npm run tauri:dev
-```
+<details>
+<summary>웹 오버레이 모드 (OBS 브라우저 소스)</summary>
 
-* 게임 화면 위에 항상 위(`alwaysOnTop`) 투명 창으로 직접 오버레이됩니다.
-* 최종 바이너리 빌드:
-  ```bash
-  npm run tauri:build
-  ```
-  $\rightarrow$ `src-tauri/target/release/mofo.exe` (약 10MB 경량 실행 파일 생성).
+`npm run dev`로 띄운 뒤 `http://localhost:3002`를 OBS 브라우저 소스(1920×1080)로 추가하면 투명 레이어로 합성할 수 있습니다.
+이 모드는 별도의 Mabinogi Bridge 서버(포트 3001)가 필요하며, 이 저장소에는 포함되지 않습니다.
+
+</details>
 
 ---
+
+## 🧱 기술 스택
+
+| 영역 | 사용 기술 |
+|---|---|
+| 앱 셸 | Tauri 2 (Rust) — 투명 창, 클릭 관통, 트레이, 게임 창 추적 |
+| UI | React 19 · TypeScript · Vite · Framer Motion |
+| 미디어 제어 | Windows Media Session API · 시스템 볼륨 |
+| 원곡 검색 | FLO · iTunes · Deezer 공개 검색 |
+
+---
+
+## ⚠️ 알림
+
+MoFo는 개인이 만든 비공식 팬 도구이며, NEXON 및 마비노기 모바일과 관련이 없습니다.
+게임 이름과 상표는 각 권리자에게 있습니다.
 
 ## 📄 라이선스
 
