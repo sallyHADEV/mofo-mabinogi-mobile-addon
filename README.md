@@ -17,7 +17,7 @@
 ![Rust](https://img.shields.io/badge/Rust-stable-000000?logo=rust&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-**한국어** · [English](README.en.md)
+**한국어** · [English](README.en.md) · [日本語](README.ja.md) · [繁體中文](README.zh-TW.md)
 
 </div>
 
